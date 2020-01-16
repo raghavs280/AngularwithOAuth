@@ -13,9 +13,9 @@ export class CallApiComponent implements OnInit {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   ngOnInit() {
-    let headers = new HttpHeaders({ 'Bearer': this.authService.getAuthorizationHeaderValue() });
-    this.http.get("https://localhost:5555/api/values", { headers: headers })
+    let headers = new HttpHeaders({ 'Authorization': this.authService.getAuthorizationHeaderValue() });
+    this.http.get("https://localhost:44309/weatherforecast", { headers: headers })
           .subscribe(response => this.Response = response);
-  }
+   }
 
 }

@@ -1,6 +1,7 @@
 ﻿using IdentityModel;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
+using IdentityServer4;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,23 @@ namespace AuthServer
                 ClientSecrets = new List<Secret> {
                     new Secret("superSecretPassword".Sha256())},
                 AllowedScopes = new List<string> {"customAPI.read"}
-            }
+            }, new Client {
+                    ClientId = "openIdConnectClient",
+                    ClientName = "Example Implicit Client Application",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowedScopes = new List<string>
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Email,
+                        "role",
+                        "customAPI.write"
+                    },
+                RedirectUris = new List<string> { "http://localhost:4200/auth-callback" },
+                PostLogoutRedirectUris = new List<string> { "http://localhost:4200/" },
+                AllowedCorsOrigins = new List<string> { "http://localhost:4200" },
+                AllowAccessTokensViaBrowser = true
+}
         };
         }
         public static IEnumerable<IdentityResource> GetIdentityResources()

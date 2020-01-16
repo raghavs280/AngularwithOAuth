@@ -15,7 +15,7 @@ private user: User = null;
   }
    getClientSettings():UserManagerSettings{
     return{
-      authority: 'https://localhost:44323/',
+      authority: 'https://localhost:44374/',
       client_id: 'openIdConnectClient',
       redirect_uri: 'http://localhost:4200/auth-callback',
       post_logout_redirect_uri: 'http://localhost:4200/',
